@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .main {
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      place-items: center;
+      background-image: url("https://cdn.pixabay.com/photo/2016/09/13/19/31/texture-1668079_960_720.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      overflow: auto;
+    }
+
+    .container {
+      max-width: 600px;
+      height: 500px;
+      width: 600px;
+      background-color: rgba(255, 255, 255, 0.736);
+      backdrop-filter: blur(60%);
+      border-radius: 3px;
+      padding: 30px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    p {
+      margin-block: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    input {
+      font-size: 16px;
+      padding: 10px;
+      width: 100%;
+      border: 1.5px solid #434343;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      margin: 10px;
+    }
+
+    .addTodo {
+      border: none;
+      background-color: transparent;
+    }
+
+    .add-icon {
+      background-color: rgb(36, 36, 130);
+      color: white;
+      padding-block: 8px;
+      padding-inline: 10px 15px;
+      font-size: 1.5rem;
+      margin-left: -10px;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    .add-icon:hover {
+      background-color: #7470bc;
+    }
+
+
+
+    .task-container {
+      height: 280px;
+      width: 99%;
+      padding: 15px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 20px;
+      border: .6px solid #0b0b0b;
+      background-image: url("https://cdn.pixabay.com/photo/2016/09/13/19/31/texture-1668079_960_720.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: top;
+    }
+
+    .task-container::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .task-container::-webkit-scrollbar-thumb {
+      display: none;
+    }
+
+
+    ul {
+      width: 100%;
+      list-style-type: none;
+    }
+
+    li {
+      display: block;
+      position: relative;
+      justify-content: space-between;
+      padding: 10px 15px;
+      width: 80%;
+      margin-block: 10px;
+      margin-top: 0;
+      background-color: #f0f1f6fc;
+      word-wrap: break-word;
+      border-radius: 10px;
+    }
+
+    .deleteTodo {
+      position: absolute;
+      top: 0;
+      right: -5.8rem;
+      height: 45px;
+      color: white;
+      font-size: 1.5rem;
+      background-color: #1a0080;
+      padding: 2px 10px;
+      transition: all .3s ease;
+      border-radius: 10px;
+    }
+
+    .deleteTodo:hover {
+      color: #1a0080;
+      background-color: white;
+    }
+
+    .editBtn {
+      position: absolute;
+      top: 0;
+      right: 40px;
+      right: -2.98rem;
+      height: 45px;
+      border: none;
+      color: #1a0080;
+      font-size: 1.5rem;
+      background-color: white;
+      border: 1px solid gray;
+      padding: 2px 10px;
+      transition: all .3s ease;
+      border-radius: 10px;
+    }
+
+    .markBtn {
+      padding-right: 5px;
+      font-size: 1.2rem;
+      /* height: 25px; */
+      /* border-radius: 50%; */
+    }
+
+
+
+    .editBtn:hover {
+      color: #2a08a599
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="main">
+    <div class="container">
+      <h1>Todo App</h1>
+      <p>
+        <input type="text" class="inputValue" placeholder="Add your todos.." onkeypress="handleKeyPress(event)">
+
+        <button onclick="addTodos()" class="addTodo"><i class="fa-regular fa-plus add-icon"></i></button>
+      </p>
+      <div class="task-container">
+        <p class="todoList"> No todos
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+
+
+</body>
+
+</html>
